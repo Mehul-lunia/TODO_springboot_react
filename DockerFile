@@ -7,5 +7,5 @@ RUN mvn clean package
 # Stage 2: Runtime
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=builder /app/target/new_project-1.0-SNAPSHOT.jar app.jar
+COPY --from=builder /target/new_project-1.0-SNAPSHOT.jar app.jar
 CMD ["java", "-jar", "app.jar"]
