@@ -1,13 +1,20 @@
 package org.example.controller;
-
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.example.Service.userService;
 import org.example.model.TODO;
-// hello
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -29,10 +36,22 @@ public class userController
         return service.getAllTodos();
     }
 
-    @GetMapping("/test")
-    public TODO test()
+    @PostMapping("/test")
+    public ResponseEntity test(@RequestParam("file")MultipartFile file, HttpServletRequest request, OutputStream outputStream)
     {
-        return new TODO("Practice SpringBoot","Understand IOC(Inversion of Control) and Dependency Injection.", LocalDateTime.now());
+        try(OutputStream os = new FileOutputStream("photo.txt")){
+
+            os.write(file.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/csrf-token")
+    public CsrfToken get_csrfToken(HttpServletRequest request)
+    {
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 
     @GetMapping("/{id}")
@@ -48,6 +67,7 @@ public class userController
         return ResponseEntity.ok(todo);
 
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable Long id)

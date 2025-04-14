@@ -12,3 +12,11 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - "3307:3306"
+    networks:
+      - my_network
+  backend:
+    build: .
+    depends_on:
+      - mysql
+    ports:
+      - "8090:8090"
