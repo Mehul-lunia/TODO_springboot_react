@@ -39,7 +39,7 @@ public class userController
     @PostMapping("/test")
     public ResponseEntity test(@RequestParam("file")MultipartFile file, HttpServletRequest request, OutputStream outputStream)
     {
-        try(OutputStream os = new FileOutputStream("photo.txt")){
+        try(OutputStream os = new FileOutputStream("new.txt")){
 
             os.write(file.getBytes());
         } catch (IOException e) {
@@ -59,6 +59,7 @@ public class userController
     {
         return service.getTodoById(id);
     }
+
     @PostMapping
     public ResponseEntity<TODO> createTodo(@RequestBody TODO todo)
     {
