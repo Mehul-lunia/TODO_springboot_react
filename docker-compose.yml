@@ -34,4 +34,4 @@ services:
       - public_network
 networks:
   my_network:
-  public_networks:
+  public_network:
