@@ -18,7 +18,7 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.Map;
 
 
 
@@ -33,25 +33,9 @@ public class userController
     @GetMapping
     public List<TODO> getAllTodos()
     {
-        return service.getAllTodos();
-    }
-
-    @PostMapping("/test")
-    public ResponseEntity test(@RequestParam("file")MultipartFile file, HttpServletRequest request, OutputStream outputStream)
-    {
-        try(OutputStream os = new FileOutputStream("new.txt")){
-
-            os.write(file.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @GetMapping("/csrf-token")
-    public CsrfToken get_csrfToken(HttpServletRequest request)
-    {
-        return (CsrfToken) request.getAttribute("_csrf");
+        List<TODO> todos = service.getAllTodos();
+//        System.out.println(todos.get(0).getId());
+        return todos;
     }
 
     @GetMapping("/{id}")
@@ -64,11 +48,21 @@ public class userController
     public ResponseEntity<TODO> createTodo(@RequestBody TODO todo)
     {
         todo.setCreated_on(LocalDateTime.now());
+        todo.setUpdated_on(LocalDateTime.now());
         service.createTodo(todo);
         return ResponseEntity.ok(todo);
 
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<TODO> updateTodo(@PathVariable Long id, @RequestBody Map<String,Object> updates)
+    {
+        TODO todo = service.getTodoById(id).orElseThrow(() -> new RuntimeException("Todo not found with id: " + id));
+        boolean old_val = (boolean) updates.get("status");
+        todo.setStatus(old_val);
+        service.createTodo(todo);
+        return ResponseEntity.ok(todo);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable Long id)

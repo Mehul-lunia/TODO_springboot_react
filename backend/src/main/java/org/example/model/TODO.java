@@ -13,25 +13,28 @@ public class TODO
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long todo_id;
-
+    private Long id;
     @Column(nullable = false)
     private String title;
-
     private String content;
-
-
     private LocalDateTime created_on;
+    private LocalDateTime updated_on;
+    private boolean status;
 
 
-    private LocalDateTime reminder_datetime;
-
-    public LocalDateTime getReminder_datetime() {
-        return reminder_datetime;
+    public Long getId()
+    {
+        return this.id;
     }
-
-    public void setReminder_datetime(LocalDateTime reminder_datetime) {
-        this.reminder_datetime = reminder_datetime;
+    public LocalDateTime getUpdated_on() {
+        return updated_on;
+    }
+    public void setUpdated_on(LocalDateTime updated_on) {
+        this.updated_on = updated_on;
+    }
+    public boolean getStatus() {return this.status;}
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getContent() {
