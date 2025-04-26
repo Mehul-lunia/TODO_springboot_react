@@ -23,15 +23,5 @@ services:
       - "8090:8090"
     networks:
       - my_network
-      - public_network
-  frontend:
-    build: ./daily-task-orbit
-    ports:
-      - "5173:5173"
-    depends_on:
-      - backend
-    networks:
-      - public_network
 networks:
   my_network:
-  public_network:
