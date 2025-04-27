@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class userService
+public class TodoService
 {
     @Autowired
     private userRepo repo;
