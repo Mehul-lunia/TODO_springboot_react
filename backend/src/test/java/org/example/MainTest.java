@@ -1,9 +1,9 @@
 package org.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.Service.userService;
+import org.example.Service.TodoService;
 import org.example.config.securityConfig;
-import org.example.controller.userController;
+import org.example.controller.todoController;
 import org.example.model.TODO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,12 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 
-@WebMvcTest(userController.class)
+@WebMvcTest(todoController.class)
 @Import(securityConfig.class)
 public class MainTest
 {
     @MockBean
-    private userService us;
+    private TodoService us;
 
     @Autowired
     private MockMvc mockMvc;
