@@ -25,7 +25,7 @@ services:
       - my_network
       - public_network
   frontend:
-    build: daily-task-orbit
+    build: ./daily-task-orbit
     ports:
       - "5173:5173"
     depends_on:
