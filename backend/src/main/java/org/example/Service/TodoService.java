@@ -1,7 +1,7 @@
 package org.example.Service;
 
 import org.example.model.TODO;
-import org.example.repositories.userRepo;
+import org.example.repositories.todoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class TodoService
 {
     @Autowired
-    private userRepo repo;
+    private todoRepo repo;
 
     public List<TODO> getAllTodos()
     {

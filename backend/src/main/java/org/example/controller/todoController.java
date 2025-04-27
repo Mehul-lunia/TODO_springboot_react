@@ -1,6 +1,6 @@
 package org.example.controller;
 import jakarta.servlet.http.HttpServletRequest;
-import org.example.Service.userService;
+import org.example.Service.TodoService;
 import org.example.model.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ import java.util.Map;
 public class todoController
 {
     @Autowired
-    private userService service;
+    private TodoService service;
 
     @GetMapping
     public List<TODO> getAllTodos()
