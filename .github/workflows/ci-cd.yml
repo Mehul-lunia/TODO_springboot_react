@@ -14,6 +14,8 @@ jobs:
       # 1. Check out the code from GitHub
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
             # Install docker-compose
       - name: Install docker-compose
