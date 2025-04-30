@@ -1,5 +1,5 @@
 version : '3'
-# Launch the mysql service first, then launch the backend service
+
 services:
   mysql:
     image: mysql:8.0
